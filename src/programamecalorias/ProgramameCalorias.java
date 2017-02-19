@@ -19,7 +19,6 @@ public class ProgramameCalorias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        try{
         Scanner ent=new Scanner(System.in);
 //        System.out.println("2");
 //        System.out.println("100");
@@ -32,48 +31,51 @@ public class ProgramameCalorias {
 //        System.out.println("0");
 //        System.exit(0);
 //        String[] dd=largo.split("\\p{Space}+");
-        int consumidas=Integer.valueOf(ent.nextLine().trim());
-        if(consumidas==0) System.out.println("");
-        while (consumidas!=0) {
+        
+        double consumidas;
+        try{consumidas=Double.valueOf(ent.nextLine().trim());}catch(Exception e){consumidas=0.0;}
+        //if(consumidas==0.0) System.out.println("");
+        while (consumidas!=0.0) {
             
             
-            int comidas=Integer.valueOf(ent.nextLine().trim());
-            if(comidas<=0){
+            Double comidas;
+            try{comidas=Double.valueOf(ent.nextLine().trim());}catch(Exception e){comidas=0.0;}
+            if(comidas<=0.0){
                 System.out.println("0");
                 ent.nextLine().trim();
-                consumidas=Integer.valueOf(ent.nextLine().trim());
-                continue;
-            
+                try{consumidas=Double.valueOf(ent.nextLine().trim());}catch(Exception e){consumidas=0.0;}
+                continue;            
             }
             //String ocult=entSt.nextLine().replaceAll("\\p{Space}", "");
             //String regexp="[^"+ocult+"]";
             //text.replaceAll(regexp, "");
             //text=Pattern.compile(regexp).matcher(text).replaceAll("");
             
-            String[] datos=ent.nextLine().trim().split("\\p{Space}+");
-            int ingeridas=0;
+            String[] datos;
+            try{datos=ent.nextLine().trim().split("\\p{Space}+");}catch(Exception e){datos=new String[]{"0"};}
+            double ingeridas=0.0;
             for (String dato : datos) {
                 try{
-                int valor=Integer.valueOf(dato);
+                double valor=Double.valueOf(dato);
                 ingeridas+=valor;
                 }catch(Exception e){}
             }
 //            while (comidas-->0) {
 //                ingeridas+=Long.valueOf(ent.next());
 //            }
-            if(ingeridas==0 || consumidas==0){
+            if(ingeridas==0.0 || consumidas==0.0){
                 System.out.println("0");
-                consumidas=Integer.valueOf(ent.nextLine().trim());
+                try{consumidas=Double.valueOf(ent.nextLine().trim());}catch(Exception e){consumidas=0.0;}
                 continue;
             }
-            if(ingeridas%consumidas==0)
-                System.out.println(ingeridas/consumidas);
-            else System.out.println((ingeridas/consumidas)+1);
-
-            consumidas=Integer.valueOf(ent.nextLine().trim());
+        //            if(ingeridas%consumidas==0)
+        //                System.out.println(ingeridas/consumidas);
+        //            else System.out.println((ingeridas/consumidas)+1);
+            
+            System.out.println((int)Math.ceil(ingeridas/consumidas));
+            try{consumidas=Double.valueOf(ent.nextLine().trim());}catch(Exception e){consumidas=0.0;}
         }
-        ent.close();}
-        catch(Exception e){System.out.print("0");}
+        ent.close();
     }
     
 }
